@@ -10,5 +10,9 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginPageComponent
+    },
+    {
+        path: 'general',
+        loadComponent: () => import('@app/modules/general/general-page/general-page.component').then(mod => mod.GeneralPageComponent)
     }
 ];

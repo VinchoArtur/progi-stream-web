@@ -7,6 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { InputComponent } from "@shared/elements/input/input.component";
 import { NgClass } from "@angular/common";
 import { UserDto } from "@app/models/users/dto/user.dto";
+import { Router } from "@angular/router";
 
 
 @UntilDestroy()
@@ -23,7 +24,13 @@ import { UserDto } from "@app/models/users/dto/user.dto";
     templateUrl: './login-page.component.html',
     styleUrl: './login-page.component.scss'
 })
-export class LoginPageComponent implements OnInit{
+export class LoginPageComponent implements OnInit {
+
+    private readonly router = inject(Router);
+
+    constructor(){
+
+    }
 
     public userData: FormGroup = new FormGroup({})
     public userName: FormControl = new FormControl<string>('');
@@ -35,7 +42,7 @@ export class LoginPageComponent implements OnInit{
     private authService = inject(AuthService);
 
 
-    public ngOnInit() {
+    public ngOnInit(){
         this.userData.addControl('userName', this.userName);
         this.userData.addControl('password', this.password);
         this.userData.addControl('firstName', this.firstName);
@@ -47,29 +54,33 @@ export class LoginPageComponent implements OnInit{
 
     onLogin(){
         this.authService.login(
-            this.userData.get('userName')?.value, this.userData.get('password')?.value
+            this.userData.get('email')?.value, this.userData.get('password')?.value
         ).pipe(untilDestroyed(this)).subscribe(value => {
-            console.log(value);
+            if( !!value.token) {
+                this.router.navigate(['general']);
+            }
         })
     }
 
 
     onRegister(){
         this.userData.markAllAsTouched();
-        if (this.userData.valid) {
+        if(this.userData.valid) {
             const newUser: UserDto = {
                 firstName: this.userData.controls['firstName'].value,
                 lastName: this.userData.controls['lastName'].value,
                 password: this.userData.controls['password'].value,
                 email: this.userData.controls['email'].value
             }
-            this.authService.register(newUser).pipe(untilDestroyed(this)).subscribe(res => {
-                console.log(res);
+            this.authService.register(newUser).pipe(untilDestroyed(this)).subscribe(({status, message}) => {
+                if(status === 201) {
+                    this.toggleFlip();
+                }
             })
         }
     }
 
-    toggleFlip() {
+    toggleFlip(){
         this.isFlipped = !this.isFlipped;
     }
 }

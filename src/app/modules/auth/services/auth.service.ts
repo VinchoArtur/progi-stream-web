@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { UserDto } from "@app/models/users/dto/user.dto";
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AuthService {
-  private readonly URL: string = 'http://localhost:3001' // test link
+    private readonly URL: string = 'http://localhost:3001' // test link
 
-  constructor(private readonly httpClient: HttpClient) { }
+    constructor(private readonly httpClient: HttpClient){
+    }
 
 
-  public login(userName: string, password: string): Observable<UserDto> {
-    return this.httpClient.post<UserDto>(`${this.URL}/auth/login`, { userName, password });
-  }
+    public login(userEmail: string, password: string): Observable<any>{
+        return this.httpClient.post<any>(`${this.URL}/auth/login`, {userEmail, password}).pipe(
+            tap(response => {
+                if(response.status === 200) {
+                    const token = response.token;
+                    sessionStorage.setItem('accessToken', token);
+                } else {
+                    throw new Error('invalid login');
+                }
 
-  public register(userDto: UserDto): Observable<{status: number}> {
-    return this.httpClient.post<{status: number}>(`${this.URL}/auth/create`, { ...userDto });
-  }
+            })
+        );
+    }
+
+    public register(userDto: UserDto): Observable<{message: string, status: number}>{
+        return this.httpClient.post<{message: string, status: number}>(`${this.URL}/auth/create`, {...userDto});
+    }
 }
