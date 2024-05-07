@@ -1,0 +1,20 @@
+<!-- video-calls.component.html -->
+
+<div>
+  <!-- Локальное видео -->
+  <video id="localVideo" autoplay muted></video>
+  <!-- Кнопка для управления аудио -->
+  <app-button [buttonText]="'Audio'" (click)="toggleAudio()"></app-button>
+  <!-- Кнопка для управления видео -->
+  <app-button [buttonText]="'Video'" (click)="toggleVideo()"></app-button>
+</div>
+
+<div>
+  <!-- Видео удаленного пира -->
+  <video id="remoteVideo" autoplay></video>
+</div>
+
+<div>
+  <!-- Кнопка для начала вызова -->
+  <app-button [buttonText]="'Start Call'" (click)="startCall()"></app-button>
+</div>
