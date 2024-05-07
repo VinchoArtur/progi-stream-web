@@ -22,6 +22,7 @@
     "@aspnet/signalr": "^1.0.27",
     "@auth0/angular-jwt": "~5.2.0",
     "@ngneat/until-destroy": "^10.0.0",
+    "animate.css": "^4.1.1",
     "node-glob": "^1.2.0",
     "rxjs": "~7.8.0",
     "socket.io-client": "^4.7.5",

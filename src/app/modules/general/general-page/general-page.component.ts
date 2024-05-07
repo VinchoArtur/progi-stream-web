@@ -3,6 +3,7 @@ import { VideoCallsComponent } from "@app/modules/calls/video.calls/video-calls.
 import {ButtonComponent} from "@shared/elements/buttton/button.component";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'progi-general-page',
@@ -12,9 +13,10 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
     VideoCallsComponent,
     ButtonComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
-  styleUrl: './general-page.component.scss'
+  styleUrls: ['./general-page.component.scss']
 })
 export class GeneralPageComponent {
 
@@ -36,6 +38,25 @@ export class GeneralPageComponent {
 
   toggleFlip() {
     this.isFlipped = !this.isFlipped;
+    const animateContainerFront = document.getElementsByClassName('general-front')[0] as HTMLElement;
+    const animateContainerBack = document.getElementsByClassName('general-back')[0] as HTMLElement;
+    if(this.isFlipped) {
+      animateContainerFront.style.animationName = 'bounceOutDown';
+      setTimeout(() => {
+        animateContainerBack.style.visibility = 'visible'
+        animateContainerBack.style.animationName = 'bounceInDown';
+        animateContainerFront.style.visibility = 'hidden';
+      }, 1000);
+    } else {
+      animateContainerBack.style.animationName = 'bounceOutDown';
+
+      setTimeout(() => {
+        animateContainerBack.style.visibility = 'hidden';
+        animateContainerFront.style.animationName = 'bounceInDown';
+        animateContainerFront.style.visibility = 'visible';
+      }, 1000);
+    }
+
   }
 
 }
