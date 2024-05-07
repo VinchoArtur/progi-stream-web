@@ -14,5 +14,9 @@ export const routes: Routes = [
     {
         path: 'general',
         loadComponent: () => import('@app/modules/general/general-page/general-page.component').then(mod => mod.GeneralPageComponent)
+    },
+    {
+        path: 'video-calls',
+        loadComponent: () => import('@app/modules/calls/video.calls/video-calls.component').then(mod => mod.VideoCallsComponent)
     }
 ];

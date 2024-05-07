@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { io } from 'socket.io-client';
 import { ButtonComponent } from "@shared/elements/buttton/button.component";
+import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
     selector: 'progi-video-calls',
@@ -16,6 +18,9 @@ export class VideoCallsComponent implements OnInit {
     audioEnabled: boolean = false;
     videoEnabled: boolean = false;
     remoteStreams: MediaStream[] = [];
+
+    private readonly router = inject(Router);
+    private readonly location = inject(Location);
 
     constructor() { }
 
@@ -72,5 +77,9 @@ export class VideoCallsComponent implements OnInit {
                 this.audioEnabled = true;
             }).catch(error => console.error('Error accessing media devices', error));
         }
+    }
+
+    goBack(){
+      this.location.back();
     }
 }
