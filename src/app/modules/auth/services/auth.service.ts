@@ -7,7 +7,7 @@ import { UserDto } from "@app/models/users/dto/user.dto";
     providedIn: 'root',
 })
 export class AuthService {
-    private readonly URL: string = 'http://localhost:3001' // test link
+    private readonly URL: string = 'http://165.232.131.67' // test link
 
     constructor(private readonly httpClient: HttpClient){
     }

@@ -14,18 +14,15 @@
             <!-- Локальное видео -->
             <video id="{{consumer.id}}" autoplay muted></video>
           </div>
+			<div class="m-3 border border-sky-500 bg-amber-800">
+				<!-- Локальное видео -->
+				<video id="remoteVideo" autoplay muted></video>
+			</div>
         </section>
         <div class="flex justify-center">
-          <!-- Кнопка для управления аудио -->
-          <app-button [buttonText]="'Audio'" (click)="toggleAudio()"></app-button>
-          <!-- Кнопка для управления видео -->
-          <app-button [buttonText]="'Video'" (click)="toggleVideo()"></app-button>
+          <app-button [buttonText]="'Audio'" (click)="toggleAudio(consumer.id)"></app-button>
+          <app-button [buttonText]="'Video'" (click)="toggleVideo(consumer.id)"></app-button>
         </div>
-
-<!--            <div>-->
-<!--              &lt;!&ndash; Видео удаленного пира &ndash;&gt;-->
-<!--              <video id="remoteVideo" autoplay></video>-->
-<!--            </div>-->
       </div>
 
     </div>
@@ -35,9 +32,12 @@
 <div class="flex">
   <!-- Кнопка для начала вызова -->
   <app-button [buttonText]="'Start Call'" (click)="startCall()"></app-button>
+  <app-button [buttonText]="'End Call'" (click)="endCall()"></app-button>
 </div>
 
 <section>
+	<input type="text" [(ngModel)]="userId" placeholder="user id">
+	<input type="text">
   <app-button [buttonText]="'Add Window'" class="addWindow" (click)="addWindow()"
               [disabled]="consumerCounter === 6"></app-button>
   <app-button [buttonText]="'Remove Window'" class="removeWindow" (click)="removeWindow()"
