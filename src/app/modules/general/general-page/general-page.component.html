@@ -1,0 +1,54 @@
+<div class="flex justify-center items-center w-1/3 h-1/3 rounded-md "
+     >
+  <div>
+    <div
+      class="general-front bg-blue-400 overflow-hidden min-w-52 rounded-3xl flex flex-col justify-center items-start text-4xl text-indigo-500 gap-7 pl-4">
+      <section>
+        <h3>
+          Создать
+        </h3>
+        <app-button [buttonText]="'Секция 1'" (click)="toggleFlip()"></app-button>
+      </section>
+    </div>
+    <div class="general-back bg-blue-400 rounded-3xl flex justify-center content-center flex-col pl-4">
+      <h3>
+        Присоединиться
+      </h3>
+      <section>
+        <form [formGroup]="userData" class="flex flex-wrap">
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="general-title">
+              Title
+            </label>
+            <input formControlName="title"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="general-title" type="text" placeholder="title">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="general-name">
+              Name
+            </label>
+            <input formControlName="name"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="general-name" type="text" placeholder="name">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="general-password">
+              Password
+            </label>
+            <input formControlName="password"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="general-password" type="password" placeholder="password">
+          </div>
+        </form>
+      </section>
+      <section>
+        <app-button [buttonText]="'Create'" (click)="toCalls()"></app-button>
+        <app-button [buttonText]="'Back'" (click)="toggleFlip()"></app-button>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+

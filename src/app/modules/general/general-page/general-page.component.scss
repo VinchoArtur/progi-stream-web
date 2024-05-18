@@ -1,0 +1,32 @@
+:host {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+
+.other {
+  &__flipped {
+    position: relative;
+  }
+
+  &__unflipped {
+    position: relative;
+  }
+}
+.general-front {
+  animation-fill: flow;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.general-back {
+  animation-fill: flow;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+}
+

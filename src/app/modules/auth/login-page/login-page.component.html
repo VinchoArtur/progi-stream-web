@@ -1,0 +1,80 @@
+<div class="flip-container w-10/12 h-1/2 max-w-6xl" [class.flipped]="isFlipped">
+  <div class="flipper h-96">
+    <div
+      class="front bg-blue-400 overflow-hidden min-w-52 rounded-3xl flex flex-col justify-center items-start text-4xl text-indigo-500 gap-7 pl-4">
+      <section>
+        Хэлёу ёпта
+      </section>
+      <section>
+        <form [formGroup]="userData">
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="authEmail">
+              Email
+            </label>
+            <input formControlName="email"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="authEmail" type="email" placeholder="Email">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <input formControlName="password"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="password" type="password" placeholder="password">
+          </div>
+        </form>
+      </section>
+      <section>
+        <app-button [buttonText]="'Войти'" (click)="onLogin()"></app-button>
+        <app-button [buttonText]="'Регистрация'" (click)="toggleFlip()"></app-button>
+      </section>
+    </div>
+    <div
+      class="back bg-blue-400 overflow-hidden min-w-52 rounded-3xl flex flex-col justify-center items-start text-4xl text-indigo-500 gap-7 pl-4">
+      <section>
+        Познакомимся ёпта
+      </section>
+      <section>
+        <form [formGroup]="userData" class="flex flex-wrap gap-7">
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="firstName">
+              Enter first name
+            </label>
+            <input formControlName="firstName"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="firstName" type="text" placeholder="User name">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lastName">
+              Enter last name
+            </label>
+            <input formControlName="lastName"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="lastName" type="text" placeholder="Last name">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="registerPassword">
+              Enter password
+            </label>
+            <input formControlName="password"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="registerPassword" type="password" placeholder="password">
+          </div>
+          <div class="text">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+              Enter email
+            </label>
+            <input formControlName="email"
+                   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+                   id="email" type="email" placeholder="email">
+          </div>
+        </form>
+      </section>
+      <section>
+        <app-button [buttonText]="'Регистрация'" (click)="onRegister()"></app-button>
+        <app-button [buttonText]="'Назад'" (click)="toggleFlip()"></app-button>
+      </section>
+    </div>
+  </div>
+</div>
