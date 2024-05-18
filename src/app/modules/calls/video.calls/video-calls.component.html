@@ -1,25 +1,46 @@
 <!-- video-calls.component.html -->
 
-<div>
-  <!-- Локальное видео -->
-  <video id="localVideo" autoplay muted></video>
-  <!-- Кнопка для управления аудио -->
-  <app-button [buttonText]="'Audio'" (click)="toggleAudio()"></app-button>
-  <!-- Кнопка для управления видео -->
-  <app-button [buttonText]="'Video'" (click)="toggleVideo()"></app-button>
+<div class="flex">
+  <!--  Возвращение на предыдущий роут  -->
+  <app-button [buttonText]="'Back'" (click)="goBack()"></app-button>
 </div>
 
-<div>
-  <!-- Видео удаленного пира -->
-  <video id="remoteVideo" autoplay></video>
-</div>
+<main class="wrapper w-full h-3/4 flex justify-center items-center flex-wrap">
+  @for (consumer of consumers; track consumer) {
+    <div class="flex justify-center w-1/3">
+      <div class="mainWindow bg-blue-500 gap-2 w-2/3">
+        <section class="gap-2 flex-wrap">
+          <div class="m-3 border border-sky-500 bg-amber-800">
+            <!-- Локальное видео -->
+            <video id="{{consumer.id}}" autoplay muted></video>
+          </div>
+        </section>
+        <div class="flex justify-center">
+          <!-- Кнопка для управления аудио -->
+          <app-button [buttonText]="'Audio'" (click)="toggleAudio()"></app-button>
+          <!-- Кнопка для управления видео -->
+          <app-button [buttonText]="'Video'" (click)="toggleVideo()"></app-button>
+        </div>
 
-<div>
+<!--            <div>-->
+<!--              &lt;!&ndash; Видео удаленного пира &ndash;&gt;-->
+<!--              <video id="remoteVideo" autoplay></video>-->
+<!--            </div>-->
+      </div>
+
+    </div>
+  }
+</main>
+
+<div class="flex">
   <!-- Кнопка для начала вызова -->
   <app-button [buttonText]="'Start Call'" (click)="startCall()"></app-button>
 </div>
 
-<div>
-  <!--  Возвращение на предыдущий роут  -->
-  <app-button [buttonText]="'Back'" (click)="goBack()"></app-button>
-</div>
+<section>
+  <app-button [buttonText]="'Add Window'" class="addWindow" (click)="addWindow()"
+              [disabled]="consumerCounter === 6"></app-button>
+  <app-button [buttonText]="'Remove Window'" class="removeWindow" (click)="removeWindow()"
+              [disabled]="consumerCounter === 0"></app-button>
+</section>
+

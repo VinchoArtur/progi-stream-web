@@ -1,16 +1,17 @@
 import {Component, inject, OnInit} from '@angular/core';
 import { io } from 'socket.io-client';
 import { ButtonComponent } from "@shared/elements/buttton/button.component";
-import {Router} from "@angular/router";
-import {Location} from "@angular/common";
+import {Location, NgForOf, NgIf} from "@angular/common";
 
 @Component({
     selector: 'progi-video-calls',
     templateUrl: './video-calls.component.html',
     styleUrls: ['./video-calls.component.scss'],
-    imports: [
-        ButtonComponent
-    ],
+  imports: [
+    ButtonComponent,
+    NgForOf,
+    NgIf
+  ],
     standalone: true
 })
 export class VideoCallsComponent implements OnInit {
@@ -18,8 +19,9 @@ export class VideoCallsComponent implements OnInit {
     audioEnabled: boolean = false;
     videoEnabled: boolean = false;
     remoteStreams: MediaStream[] = [];
+    consumerCounter: number = 1;
+    consumers: any [] = [{id: this.consumerCounter, title: `${this.consumerCounter}`}];
 
-    private readonly router = inject(Router);
     private readonly location = inject(Location);
 
     constructor() { }
@@ -71,7 +73,7 @@ export class VideoCallsComponent implements OnInit {
         if (this.videoEnabled) {
             navigator.mediaDevices.getUserMedia({ video: true, audio: this.audioEnabled }).then(stream => {
                 this.localStream = stream;
-                const localVideo = document.getElementById('localVideo') as HTMLVideoElement;
+                const localVideo = document.getElementById('{{consumer.id}}') as HTMLVideoElement;
                 localVideo.srcObject = stream;
                 // Включаем аудио и видео после успешного получения потока
                 this.audioEnabled = true;
@@ -81,5 +83,20 @@ export class VideoCallsComponent implements OnInit {
 
     goBack(){
       this.location.back();
+    }
+
+    addWindow() {
+      this.consumerCounter += 1;
+      this.consumers.push({id: this.consumerCounter, title: `${this.consumerCounter}`});
+      // let element = document.getElementsByClassName('.mainWindow');
+      // let block = document.createElement('div.mainWindow');
+      // element.appendChild(block);
+    }
+
+    removeWindow() {
+      this.consumers.splice(this.consumers.length-1, 1);
+      this.consumerCounter -= 1;
+      // let element = document.getElementsByClassName('.mainWindow');
+      // document.removeChild(element);
     }
 }

@@ -11,5 +11,7 @@ export class ButtonComponent {
   @Input()
   color: string = 'purple';
   @Input()
-  buttonText: string = 'button text'
+  buttonText: string = 'button text';
+  @Input()
+  disabled: boolean = false;
 }
