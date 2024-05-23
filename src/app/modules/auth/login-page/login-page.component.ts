@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     constructor(){
 
     }
-
+	//  ToDo надо переписать 1
     public userData: FormGroup = new FormGroup({})
     public userName: FormControl = new FormControl<string>('');
     public password: FormControl = new FormControl<string>('');

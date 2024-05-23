@@ -36,6 +36,7 @@
 </div>
 
 <section>
+	<input type="text" [(ngModel)]="params" placeholder="title: {{params.title}} name: {{params.name}} password: {{params.password}}">
 	<input type="text" [(ngModel)]="userId" placeholder="user id">
 	<input type="text">
   <app-button [buttonText]="'Add Window'" class="addWindow" (click)="addWindow()"

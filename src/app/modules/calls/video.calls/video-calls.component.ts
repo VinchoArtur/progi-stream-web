@@ -1,9 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {io} from 'socket.io-client';
 import {ButtonComponent} from "@shared/elements/buttton/button.component";
 import {Location, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {GeneralPageComponent} from "@app/modules/general/general-page/general-page.component";
+import {ActivatedRoute} from "@angular/router";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
+@UntilDestroy()
 @Component({
 	selector: 'progi-video-calls',
 	templateUrl: './video-calls.component.html',
@@ -28,11 +32,16 @@ export class VideoCallsComponent implements OnInit {
 
 	private readonly location = inject(Location);
 	userId!: string;
+	params!: {title: string, name: string, password: string} ;
 
-	constructor() {
+	constructor(private readonly route: ActivatedRoute) {
 	}
 
 	ngOnInit(): void {
+		this.route.params.pipe(untilDestroyed(this)).subscribe(params => {
+			console.log(params);
+			this.params = params as { title: string, name: string, password: string }
+		});
 	}
 
 	startCall() {
