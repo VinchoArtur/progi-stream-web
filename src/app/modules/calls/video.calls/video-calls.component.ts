@@ -46,7 +46,7 @@ export class VideoCallsComponent implements OnInit {
 
 	startCall() {
 		if (this.socket === null) {
-			this.socket = io('ws://localhost:3001/calls');
+			this.socket = io('ws://localhost:3000/calls');;
 			;
 		}
 		this.toggleVideo(`1`);
@@ -105,6 +105,7 @@ export class VideoCallsComponent implements OnInit {
 					}))
 				};
 				this.socket.emit('calls', streamData);
+				// ToDo здесь идёт подключение другого пользователя
 				this.socket.on('remoteStream', (data: { userId: string, streamId: string, tracks: any[] }) => {
 					const remoteStream = new MediaStream();
 					data.tracks.forEach(trackInfo => {

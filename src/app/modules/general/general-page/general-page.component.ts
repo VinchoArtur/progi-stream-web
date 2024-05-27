@@ -35,6 +35,7 @@ export class GeneralPageComponent implements OnInit {
 	public generalPassword: FormControl = new FormControl<string>({value: '', disabled: true}, Validators.required);
 	public isFlipped: boolean = false;
 	public isValidCreate: boolean = false;
+	public joinedToRoomTitle: string =  '';
 
 	public ngOnInit() {
 		this.userData.addControl('generalTitle', this.generalTitle);
@@ -51,7 +52,6 @@ export class GeneralPageComponent implements OnInit {
 			this.userData.controls['generalPassword'].disable();
 		}
 	}
-
 	toCalls() {
 		this.isValidCreate = false;
 		const title = this.userData.controls['generalTitle'].value;
@@ -67,6 +67,10 @@ export class GeneralPageComponent implements OnInit {
 			const sentObject = {title, name, password};
 			this.router.navigate(['video-calls', sentObject]);
 		}
+	}
+
+	joinToCalls() {
+		this.router.navigate(['video-calls']);
 	}
 
 	toggleFlip() {

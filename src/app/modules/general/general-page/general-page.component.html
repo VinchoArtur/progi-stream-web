@@ -7,7 +7,40 @@
 				<h3>
 					Создать
 				</h3>
-				<app-button [buttonText]="'Секция 1'" (click)="toggleFlip()"></app-button>
+				<section>
+					<form [formGroup]="userData" class="flex flex-wrap">
+						<div class="text">
+							<label class="block text-gray-700 text-sm font-bold mb-2" for="general-title">
+								Title
+							</label>
+							<input formControlName="generalTitle"
+								   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+								   id="general-title" type="text" placeholder="title">
+						</div>
+						<div class="text">
+							<label class="block text-gray-700 text-sm font-bold mb-2" for="general-name">
+								Name
+							</label>
+							<input formControlName="generalName"
+								   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+								   id="general-name" type="text" placeholder="name">
+						</div>
+						<!--	ToDo сюда добавить toggle -->
+						<div class="text">
+							<progi-toogle (isActive)="onIsActive($event)"></progi-toogle>
+							<label class="block text-gray-700 text-sm font-bold mb-2" for="general-password">
+								Password
+							</label>
+							<input formControlName="generalPassword"
+								   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+								   id="general-password" type="password" placeholder="password">
+						</div>
+					</form>
+				</section>
+				<section>
+					<app-button [buttonText]="'Create'" (click)="toCalls()"></app-button>
+					<app-button [buttonText]="'Секция 1'" (click)="toggleFlip()"></app-button>
+				</section>
 			</section>
 		</div>
 		<div class="general-back bg-blue-400 rounded-3xl flex justify-center content-center flex-col pl-4 gap-2">
@@ -15,37 +48,17 @@
 				Присоединиться
 			</h3>
 			<section>
-				<form [formGroup]="userData" class="flex flex-wrap">
-					<div class="text">
-						<label class="block text-gray-700 text-sm font-bold mb-2" for="general-title">
-							Title
-						</label>
-						<input formControlName="generalTitle"
-							   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
-							   id="general-title" type="text" placeholder="title">
-					</div>
-					<div class="text">
-						<label class="block text-gray-700 text-sm font-bold mb-2" for="general-name">
-							Name
-						</label>
-						<input formControlName="generalName"
-							   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
-							   id="general-name" type="text" placeholder="name">
-					</div>
-					<!--	ToDo сюда добавить toggle -->
-					<div class="text">
-						<progi-toogle (isActive)="onIsActive($event)"></progi-toogle>
-						<label class="block text-gray-700 text-sm font-bold mb-2" for="general-password">
-							Password
-						</label>
-						<input formControlName="generalPassword"
-							   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
-							   id="general-password" type="password" placeholder="password">
-					</div>
-				</form>
+				<div class="text">
+					<label class="block text-gray-700 text-sm font-bold mb-2" for="general-title">
+						Title
+					</label>
+					<input [(ngModel)]="joinedToRoomTitle"
+						   class="bg-blue-300 appearance-none border-2 border-gray-200 p-0.5 text-2xl rounded w-9/12  px-4 text-gray-700 focus:outline-none focus:bg-amber-200 focus:border-indigo-500"
+						   id="general-join-title" type="text" placeholder="title">
+				</div>
 			</section>
 			<section>
-				<app-button [buttonText]="'Create'" (click)="toCalls()"></app-button>
+				<app-button [buttonText]="'Join'" (click)="joinToCalls()"></app-button>
 				<app-button [buttonText]="'Back'" (click)="toggleFlip()"></app-button>
 			</section>
 		</div>
