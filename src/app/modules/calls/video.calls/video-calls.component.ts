@@ -1,9 +1,8 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {io} from 'socket.io-client';
 import {ButtonComponent} from "@shared/elements/buttton/button.component";
 import {Location, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {GeneralPageComponent} from "@app/modules/general/general-page/general-page.component";
 import {ActivatedRoute} from "@angular/router";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
@@ -27,12 +26,13 @@ export class VideoCallsComponent implements OnInit {
 	remoteStreams: MediaStream[] = [];
 	consumerCounter: number = 1;
 	consumers: any [] = [{id: this.consumerCounter, title: `${this.consumerCounter}`}];
-	private socket = io('ws://165.232.131.67/calls');
+	// private socket = io('ws://165.232.131.67/api/calls');
+	private socket = io('ws://localhost:3000/calls');
 
 
 	private readonly location = inject(Location);
 	userId!: string;
-	params!: {title: string, name: string, password: string} ;
+	params!: { title: string, name: string, password: string };
 
 	constructor(private readonly route: ActivatedRoute) {
 	}
@@ -46,9 +46,11 @@ export class VideoCallsComponent implements OnInit {
 
 	startCall() {
 		if (this.socket === null) {
-			this.socket = io('ws://localhost:3001/calls');;
+			this.socket = io('ws://localhost:3001/calls');
+			;
 		}
-		this.toggleVideo(`1`);;
+		this.toggleVideo(`1`);
+		;
 	}
 
 	endCall() {
@@ -106,7 +108,7 @@ export class VideoCallsComponent implements OnInit {
 				this.socket.on('remoteStream', (data: { userId: string, streamId: string, tracks: any[] }) => {
 					const remoteStream = new MediaStream();
 					data.tracks.forEach(trackInfo => {
-						navigator.mediaDevices.getUserMedia({ [trackInfo.kind]: true }).then(mediaStream => {
+						navigator.mediaDevices.getUserMedia({[trackInfo.kind]: true}).then(mediaStream => {
 							const track = mediaStream.getTracks().find(t => t.kind === trackInfo.kind);
 							if (track) {
 								remoteStream.addTrack(track);
